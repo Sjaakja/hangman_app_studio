@@ -19,3 +19,19 @@ Structure of the app with links to mockup pictures:
 [Play2]: https://github.com/Sjaakja/hangman_app_studio/blob/master/doc/PLAY2.png
 [My Condemned]: https://github.com/Sjaakja/hangman_app_studio/blob/master/doc/MYCONDEMNED.png
 [Statistics]: https://github.com/Sjaakja/hangman_app_studio/blob/master/doc/STATISTICS.png
+
+
+Features of the game:
+* Upon launch, You'll find yourself in the main menu from where you can go to the game, you can add your condemned people poule and where you can see your highscores.
+* Before you start a new game you can choose from various options. Such as, the length of the word to be guessed, the number of tries you have before your condemned is executed, and with wich condemned you wish to play.
+* In-game you'll play hangman like you're used to.
+* Tapping letters will make you guess the different letters of the word.
+* In the My Condemned section you'll be able to add condemned people (via pictures) they will be removed from your poule if you lose the game 3 times with the same condemned. They'll still be in the highscores table, but you can no longer win games whith/for them.
+* You can share your highscores table with facebook.
+
+
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
