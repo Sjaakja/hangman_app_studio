@@ -17,8 +17,6 @@ used by:
 - My Condemned: To add or delete playable condemned. It is not possible to delete condemned who are no longer playable (LIVES == 0).
 - Highscores: Sorted in order WIN STREAK, LIVES, NAME, high to low (only top n condemned).
 
-
-
 **Hangman - Words**
 
 | WORD (unique)            | LENGTH        |
@@ -27,3 +25,9 @@ used by:
 
 used by: 
 - Play: To retrieve a playable word.
+
+
+Activities structure:
+-----------
+
+![alt text](https://github.com/Sjaakja/hangman_app_studio/blob/master/doc/HOME.png "ACTIVITIES STRUCTURE")
