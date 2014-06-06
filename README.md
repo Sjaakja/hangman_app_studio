@@ -1,7 +1,7 @@
 Hangman - Time to save your friends
 ===================================
-
 Android implementation of the original hangman game
+---------------------------------------------------
 
 In Hangman you try to guess a word by guessing individual letters. Every time you select a letter which is not in the to be guessed word, you get one step closer to being hanged.
 
@@ -28,10 +28,3 @@ Features of the game:
 * Tapping letters will make you guess the different letters of the word.
 * In the My Condemned section you'll be able to add condemned people (via pictures) they will be removed from your poule if you lose the game 3 times with the same condemned. They'll still be in the highscores table, but you can no longer win games whith/for them.
 * You can share your highscores table with facebook.
-
-
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
