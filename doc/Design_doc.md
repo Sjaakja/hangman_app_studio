@@ -29,5 +29,14 @@ used by:
 
 Activities structure:
 -----------
+* [Home][]
+	* [Play1][]
+		* [Play2][]
+	* [My Condemned][]
+	* [Statistics][]
 
-![alt text](https://github.com/Sjaakja/hangman_app_studio/blob/master/doc/STRUCTURE.png)
+[Home]: https://github.com/Sjaakja/hangman_app_studio/blob/master/doc/HOME.png
+[Play1]: https://github.com/Sjaakja/hangman_app_studio/blob/master/doc/PLAY1.png
+[Play2]: https://github.com/Sjaakja/hangman_app_studio/blob/master/doc/PLAY2.png
+[My Condemned]: https://github.com/Sjaakja/hangman_app_studio/blob/master/doc/MYCONDEMNED.png
+[Statistics]: https://github.com/Sjaakja/hangman_app_studio/blob/master/doc/STATISTICS.png
