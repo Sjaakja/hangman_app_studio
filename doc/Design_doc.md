@@ -30,4 +30,4 @@ used by:
 Activities structure:
 -----------
 
-![alt text](https://github.com/Sjaakja/hangman_app_studio/blob/master/doc/HOME.png "ACTIVITIES STRUCTURE")
+![alt text](https://github.com/Sjaakja/hangman_app_studio/blob/master/doc/STRUCTURE.png)
