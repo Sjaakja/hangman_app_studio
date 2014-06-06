@@ -4,8 +4,9 @@ DESIGN DOCUMENT
 This is the design document for **Hangman - Time to save your friends**.
 
 Databases:
+----------
 
-My Condemned
+**My Condemned**
 
 | NAME (unique)   | PICTURE                 | WIN STREAK        | LIVES                                |
 | --------------- | ----------------------- | ----------------- | ------------------------------------ |
@@ -16,7 +17,7 @@ used by:
 - My Condemned: To add or delete playable condemned. It is not possible to delete condemned who are no longer playable (LIVES == 0).
 - Highscores: Sorted in order WIN STREAK, LIVES, NAME, high to low (only top n condemned).
 
-Hangman - Words
+**Hangman - Words**
 
 | WORD (unique)            | LENGTH        |
 | ------------------------ | ------------- |
@@ -24,8 +25,3 @@ Hangman - Words
 
 used by: 
 - Play: To retrieve a playable word.
-
-
-| Tables        | Are           | Cool  |
-| ------------- | ------------- | ----- |
-| *col 3 is*      | right-aligned | $1600 |
