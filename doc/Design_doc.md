@@ -6,6 +6,7 @@ This is the design document for **Hangman - Time to save your friends**.
 Databases:
 
 My Condemned
+
 | NAME (unique)   | PICTURE                 | WIN STREAK        | LIVES                                |
 | --------------- | ----------------------- | ----------------- | ------------------------------------ |
 | *condemned one* | *reference to an image* | *number of saves* | *lives of particular condemned left* |
@@ -16,6 +17,7 @@ used by:
 - Highscores: Sorted in order WIN STREAK, LIVES, NAME, high to low (only top n condemned).
 
 Hangman - Words
+
 | WORD (unique)            | LENGTH        |
 | ------------------------ | ------------- |
 | *word in list delivered* | *word length* |
