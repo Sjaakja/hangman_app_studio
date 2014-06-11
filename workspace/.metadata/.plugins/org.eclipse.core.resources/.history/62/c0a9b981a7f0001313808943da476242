@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Hangman - Time to save your friends</string>
+    <string name="action_settings">Settings</string>
+    
+    <string name="title_activity_play_settings">PlaySettings</string>
+    	<string name="text_wrong_guesses">Maximum amount of wrong guesses</string>
+    	<string name="text_word_length">Length of word</string>
+    	<string name="text_choose_condemned">Choose your condemned</string>
+    	
+    <string name="title_activity_play">Play</string>
+    <string name="title_activity_my_condemned">MyCondemned</string>
+    <string name="title_activity_highscores">Highscores</string>
+
+</resources>
