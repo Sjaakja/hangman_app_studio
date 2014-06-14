@@ -1,0 +1,30 @@
+package com.example.hangman_timetosaveyourfriends;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+
+public class GamePlay {
+	
+	SharedPreferences my_settings;
+	
+	public String getWord(Context context) {
+		
+		my_settings = context.getSharedPreferences("MySettings", Context.MODE_PRIVATE);
+		
+		return "string";	
+	}
+
+	public String updateGuessed() {
+		
+		return "string";
+	}
+	
+	public void updateWordShown() {
+		
+		
+	}
+	
+	
+	
+
+}

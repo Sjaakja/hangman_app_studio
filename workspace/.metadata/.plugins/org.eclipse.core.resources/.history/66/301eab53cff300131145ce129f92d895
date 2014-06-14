@@ -1,0 +1,32 @@
+package com.example.hangman_timetosaveyourfriends;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.inputmethod.InputMethodManager;
+
+public class Play extends Activity {
+	
+	InputMethodManager keyboard;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_play);
+		
+		// Force activity to show soft keyboard upon create
+		InputMethodManager keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+	            keyboard.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+		
+		GamePlay randomWord = new GamePlay();
+		randomWord.getWord(this.getApplicationContext());
+	}
+	
+	@Override
+	protected void onPause() {
+		
+		
+		super.onPause();
+	}
+	
+}

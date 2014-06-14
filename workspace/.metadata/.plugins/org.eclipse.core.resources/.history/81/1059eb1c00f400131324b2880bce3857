@@ -1,0 +1,126 @@
+package com.example.hangman_timetosaveyourfriends;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.TextView;
+
+public class Play extends Activity {
+	
+	InputMethodManager keyboard;
+	char[] hangWordChar;
+	String hangWordString;
+	char letterPressed;
+	GamePlay newGame;
+	char[] wordInProgressChar;
+	String wordInProgressString = "";
+	String score;
+	TextView displayInProgress;
+	TextView scoreBoard;
+	SharedPreferences my_settings;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_play);
+		
+		// Instantiate a new game
+		my_settings = getSharedPreferences("MySettings", Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = my_settings.edit();
+		editor.putInt("score", -1);
+		editor.commit();
+		
+		displayInProgress = (TextView) findViewById(R.id.textView1);
+		scoreBoard = (TextView) findViewById(R.id.textView2);
+		newGame = new GamePlay();
+		hangWordChar = newGame.getWord(this.getApplicationContext()).toCharArray();
+		hangWordString = String.valueOf(hangWordChar);
+		for (int i = 0; i < hangWordString.length(); i++){
+			wordInProgressString = wordInProgressString + '_';
+		}
+		wordInProgressChar = wordInProgressString.toCharArray();
+		displayInProgress.setText(wordInProgressString);
+		score = newGame.updateScore(this.getApplicationContext());
+		scoreBoard.setText(score);
+		
+		
+		final EditText inputField = (EditText) findViewById(R.id.editText1);
+
+		inputField.addTextChangedListener(new TextWatcher() {
+			@Override
+	        public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+				// TODO Auto-generated method stub
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				char[] test = s.toString().toCharArray();
+				
+				if ((int) test[0] >= 65 && (int) test[0] <= 90){
+					int found = 0;
+					letterPressed = s.charAt(0);
+					for (int i = 0; i < hangWordString.length(); i++){
+						if (letterPressed == hangWordChar[i]) {
+							wordInProgressChar[i] = letterPressed;
+							found++;
+						}
+					}
+					
+					wordInProgressString = String.valueOf(wordInProgressChar);
+					displayInProgress.setText(wordInProgressString);
+								
+					if (found != 0){
+						onWrongLetter();
+					}
+					
+					if(my_settings.getInt("score", -1) == my_settings.getInt("wrongGuess", 0)){
+						onAlertDeath();
+					}
+				}
+				inputField.setText("");
+			}
+		});
+	}
+	
+	public void onWrongLetter() {
+		score = newGame.updateScore(this.getApplicationContext());
+		scoreBoard.setText(score);
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void onAlertDeath() {
+		AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+		alertDialog.setTitle("Certain Death");
+		alertDialog.setMessage("Sorry, but you lost this game. You've sealed your game-fate. You should have guessed: " + hangWordString);
+		alertDialog.setButton("Accept or Accept", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				Intent activityChangeIntent = new Intent(Play.this, PlaySettings.class);
+		    	Play.this.startActivity(activityChangeIntent);
+			}
+		});
+		alertDialog.setIcon(R.drawable.death);
+		alertDialog.show();		
+	}
+		
+	@Override
+	protected void onPause() {
+		
+		
+		super.onPause();
+	}
+	
+}

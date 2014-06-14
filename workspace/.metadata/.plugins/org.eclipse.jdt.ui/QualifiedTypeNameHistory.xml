@@ -5,4 +5,7 @@
 <fullyQualifiedTypeName name="android.view.View"/>
 <fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
 <fullyQualifiedTypeName name="android.R.string"/>
+<fullyQualifiedTypeName name="android.view.KeyEvent"/>
+<fullyQualifiedTypeName name="com.example.hangman_timetosaveyourfriends.R.id"/>
+<fullyQualifiedTypeName name="android.view.View.OnKeyListener"/>
 </qualifiedTypeNameHistroy>

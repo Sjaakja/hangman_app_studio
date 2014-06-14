@@ -1,0 +1,45 @@
+package com.example.hangman_timetosaveyourfriends;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.inputmethod.InputMethodManager;
+
+public class Play extends Activity {
+	
+	InputMethodManager keyboard;
+	String hangWord;
+	char letterPressed;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_play);
+		
+		
+		GamePlay newGame = new GamePlay();
+		hangWord = newGame.getWord(this.getApplicationContext());
+			
+			
+	}
+	
+
+	@Override
+	public boolean onKeyUp(int keyCode, KeyEvent event) {
+		if (event.getKeyCode() >= 65 && event.getKeyCode() <= 90){
+			letterPressed = (char) event.getUnicodeChar();
+			return true;
+		}		    
+		else{
+	        return super.onKeyUp(keyCode, event);
+	    }
+	}
+		
+	@Override
+	protected void onPause() {
+		
+		
+		super.onPause();
+	}
+	
+}

@@ -1,0 +1,75 @@
+package com.example.hangman_timetosaveyourfriends;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
+
+public class Play extends Activity {
+	
+	InputMethodManager keyboard;
+	char[] hangWordChar;
+	String hangWordString;
+	char letterPressed;
+	GamePlay newGame;
+	char[] wordInProgressChar;
+	String wordInProgressString = "";
+	TextView displayInProgress;
+	TextView scoreBoard;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_play);
+		
+		// Instantiate a new game
+		displayInProgress = (TextView) findViewById(R.id.textView1);
+		scoreBoard = (TextView) findViewById(R.id.textView2);
+		newGame = new GamePlay();
+		hangWordChar = newGame.getWord(this.getApplicationContext()).toCharArray();
+		hangWordString = String.valueOf(hangWordChar);
+		for (int i = 0; i < hangWordString.length(); i++){
+			wordInProgressString = wordInProgressString + '_';
+		}
+		wordInProgressChar = wordInProgressString.toCharArray();
+		displayInProgress.setText(wordInProgressString);
+	}
+	
+
+	@Override
+	public boolean onKeyUp(int keyCode, KeyEvent event) {
+		if (event.getKeyCode() >= 65 && event.getKeyCode() <= 90){
+			int found = 0;
+			letterPressed = (char) event.getUnicodeChar();
+			for (int i = 0; i < hangWordString.length(); i++){
+				if (letterPressed == hangWordChar[i]) {
+					wordInProgressChar[i] = letterPressed;
+					found++;
+				}
+			}
+			
+			wordInProgressString = String.valueOf(wordInProgressChar);
+			displayInProgress.setText(wordInProgressString);
+						
+			if (found != 0){
+				newGame.updateScore(this.getApplicationContext());
+			}
+			
+			
+			
+			return true;
+		}		    
+		else{
+	        return super.onKeyUp(keyCode, event);
+	    }
+	}
+		
+	@Override
+	protected void onPause() {
+		
+		
+		super.onPause();
+	}
+	
+}

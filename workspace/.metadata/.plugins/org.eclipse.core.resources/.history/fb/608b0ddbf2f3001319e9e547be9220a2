@@ -1,0 +1,95 @@
+package com.example.hangman_timetosaveyourfriends;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.View.OnKeyListener;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.TextView;
+
+public class Play extends Activity {
+	
+	InputMethodManager keyboard;
+	char[] hangWordChar;
+	String hangWordString;
+	char letterPressed;
+	GamePlay newGame;
+	char[] wordInProgressChar;
+	String wordInProgressString = "";
+	String score;
+	TextView displayInProgress;
+	TextView scoreBoard;
+	SharedPreferences my_settings;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_play);
+		
+		// Instantiate a new game
+		my_settings = getSharedPreferences("MySettings", Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = my_settings.edit();
+		editor.putInt("score", -1);
+		editor.commit();
+		
+		displayInProgress = (TextView) findViewById(R.id.textView1);
+		scoreBoard = (TextView) findViewById(R.id.textView2);
+		newGame = new GamePlay();
+		hangWordChar = newGame.getWord(this.getApplicationContext()).toCharArray();
+		hangWordString = String.valueOf(hangWordChar);
+		for (int i = 0; i < hangWordString.length(); i++){
+			wordInProgressString = wordInProgressString + '_';
+		}
+		wordInProgressChar = wordInProgressString.toCharArray();
+		displayInProgress.setText(wordInProgressString);
+		score = newGame.updateScore(this.getApplicationContext());
+		scoreBoard.setText(score);
+	
+	EditText edittext = (EditText) findViewById(R.id.editText1);
+	edittext.setOnKeyListener(new OnKeyListener() {
+		@Override
+		public boolean onKeyDown(int keyCode, KeyEvent event) {
+			
+			
+			
+			if (event.getKeyCode() >= 65 && event.getKeyCode() <= 90){
+				int found = 0;
+				letterPressed = (char) event.getUnicodeChar();
+				for (int i = 0; i < hangWordString.length(); i++){
+					if (letterPressed == hangWordChar[i]) {
+						wordInProgressChar[i] = letterPressed;
+						found++;
+					}
+				}
+				
+				wordInProgressString = String.valueOf(wordInProgressChar);
+				displayInProgress.setText(wordInProgressString);
+							
+				if (found != 0){
+					score = newGame.updateScore(this.getApplicationContext());
+					scoreBoard.setText(score);
+				}
+				
+				if(my_settings.getInt("score", -1) == my_settings.getInt("wrongGuess", 0)){
+					
+				}			
+				
+				return true;
+			}		    
+			else{
+		        return super.onKeyUp(keyCode, event);
+		    }
+		}
+	});}
+		
+	@Override
+	protected void onPause() {
+		
+		
+		super.onPause();
+	}
+	
+}

@@ -1,0 +1,33 @@
+package com.example.hangman_timetosaveyourfriends;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+
+public class GamePlay {
+	
+	SharedPreferences my_settings;
+	
+	public String getWord(Context context) {
+		
+		my_settings = context.getSharedPreferences("MySettings", Context.MODE_PRIVATE);
+		String wordArray = my_settings.getInt("lengthWord", 1);
+		
+		String[] words = context.getResources().getStringArray(R.array.name);
+		
+		return "string";	
+	}
+
+	public String updateGuessed() {
+		
+		return "string";
+	}
+	
+	public void updateWordShown() {
+		
+		
+	}
+	
+	
+	
+
+}

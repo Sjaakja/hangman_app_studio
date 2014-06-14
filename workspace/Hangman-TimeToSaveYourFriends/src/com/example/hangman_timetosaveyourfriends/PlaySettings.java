@@ -1,87 +1,63 @@
 package com.example.hangman_timetosaveyourfriends;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.NumberPicker;
 
-public class PlaySettings extends ActionBarActivity {
+public class PlaySettings extends Activity {
 
+	NumberPicker wrongGuess;
+	NumberPicker lengthWord;
+	SharedPreferences my_settings;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_play_settings);
-
-		if (savedInstanceState == null) {
-			getSupportFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
-		}
+		
+		wrongGuess = (NumberPicker) findViewById(R.id.wrongGuess);
+		wrongGuess.setMinValue(1);
+		wrongGuess.setMaxValue(26);
+	    
+		lengthWord = (NumberPicker) findViewById(R.id.lengthWord);
+		lengthWord.setMinValue(1);
+		lengthWord.setMaxValue(13);		    
+		
+		Button button1 = (Button) findViewById(R.id.button1);
+		button1.setOnClickListener(new View.OnClickListener() {
+		    @Override
+		    public void onClick(View view) {
+		    	Intent activityChangeIntent = new Intent(PlaySettings.this, Play.class);
+		    	PlaySettings.this.startActivity(activityChangeIntent);
+		}});
+	}
+	
+	@Override
+	protected void onStart() {
+		super.onStart();
+		
+		my_settings = getSharedPreferences("MySettings", Context.MODE_PRIVATE);
+		wrongGuess.setValue(my_settings.getInt("wrongGuess", 5));
+		lengthWord.setValue(my_settings.getInt("lengthWord", 1));
+				
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.play_settings, menu);
-		return true;
+	protected void onPause() {
+		my_settings = getSharedPreferences("MySettings", Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = my_settings.edit();
+		editor.putInt("wrongGuess", wrongGuess.getValue());
+		editor.putInt("lengthWord", lengthWord.getValue());
+		editor.commit();
+		
+		super.onPause();
 	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
-
-		public PlaceholderFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_play_settings,
-					container, false);
-			
-			final NumberPicker np1 = (NumberPicker) rootView.findViewById(R.id.numberPicker1);
-		    np1.setMinValue(1);
-		    np1.setMaxValue(26);
-		    np1.setValue(1);
-		    
-		    final NumberPicker np2 = (NumberPicker) rootView.findViewById(R.id.numberPicker2);
-		    np2.setMinValue(1);
-		    np2.setMaxValue(20);		    
-		    np2.setValue(5);
-			
-			Button button1 = (Button)rootView.findViewById(R.id.button1);
-			button1.setOnClickListener(new View.OnClickListener() {
-			    @Override
-			    public void onClick(View view) {
-			    	Intent activityChangeIntent = new Intent(getActivity(), Play.class);
-			    	activityChangeIntent.putExtra("maxGuess", np1.getValue());
-			    	activityChangeIntent.putExtra("maxLength", np2.getValue());
-			    	getActivity().startActivity(activityChangeIntent);
-			    }
-			});
-			
-			return rootView;
-		}
-	}
-
+	
 }
+
+
